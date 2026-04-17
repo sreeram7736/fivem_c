@@ -1,0 +1,76 @@
+{
+  "meta": {
+    "version": 1,
+    "name": "demo_alley"
+  },
+  "worldLock": {
+    "time": { "h": 22, "m": 0 },
+    "weather": "CLEAR",
+    "blackout": true,
+    "ambientDensity": 0.0
+  },
+  "spawns": {
+    "props": [
+      {
+        "id": "barrel1",
+        "model": "prop_barrel_02a",
+        "pos": { "x": 0.0, "y": 0.0, "z": 71.0 },
+        "rot": { "x": 0.0, "y": 0.0, "z": 0.0 },
+        "freeze": true
+      }
+    ],
+    "peds": [
+      {
+        "id": "extra1",
+        "model": "mp_m_freemode_01",
+        "pos": { "x": 1.0, "y": 0.0, "z": 71.0 },
+        "heading": 90.0,
+        "freeze": true,
+        "appearance": {
+          "model": "mp_m_freemode_01",
+          "components": [
+            { "component_id": 11, "drawable": 15, "texture": 0 }
+          ]
+        }
+      }
+    ],
+    "vehicles": []
+  },
+  "timeline": {
+    "fps": 30,
+    "lengthMs": 8000,
+    "tracks": [
+      {
+        "type": "camera_keyframes",
+        "enabled": true,
+        "keyframes": [
+          {
+            "timeMs": 0,
+            "pos": { "x": -5.0, "y": 0.0, "z": 73.0 },
+            "rot": { "x": -8.0, "y": 0.0, "z": 90.0 },
+            "fov": 40.0
+          },
+          {
+            "timeMs": 6000,
+            "pos": { "x": -2.0, "y": 0.0, "z": 73.0 },
+            "rot": { "x": -6.0, "y": 0.0, "z": 90.0 },
+            "fov": 40.0
+          }
+        ]
+      },
+      {
+        "type": "ped_anim",
+        "target": "extra1",
+        "clips": [
+          {
+            "startMs": 1000,
+            "endMs": 7000,
+            "dict": "amb@world_human_smoking@male@male_a@base",
+            "name": "base",
+            "flag": 1
+          }
+        ]
+      }
+    ]
+  }
+}
