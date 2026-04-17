@@ -1,0 +1,55 @@
+name: ZDX Cinematic Framework Deployment
+version: 1.0.0
+author: ZIDFPS
+description: >
+  ZDX Cinematic Framework Setup complete with ox_core, ox_lib, and illenium-appearance integrated.
+  Deploys the foundation required to spawn custom peds and run synchronized events securely.
+
+tasks:
+  # 1. Download and deploy ox_lib (Soft Dependency for core and appearance UI)
+  - action: download_github
+    src: overextended/ox_lib
+    ref: main
+    dest: ./resources/[ox]/ox_lib
+
+  # 2. Download and deploy ox_core
+  - action: download_github
+    src: overextended/ox_core
+    ref: main
+    dest: ./resources/[ox]/ox_core
+
+  # 3. Download and deploy illenium-appearance
+  - action: download_github
+    src: iLLeniumStudios/illenium-appearance
+    ref: main
+    dest: ./resources/[standalone]/illenium-appearance
+
+  # 4. Download and deploy ZDX Cinematic Framework
+  # Note: Adjust the `src` below to match where your ZDXFramework repository is hosted on GitHub!
+  - action: download_github
+    src: ZIDFPS/ZDXFramework    # <-- PLACEHOLDER: Update this to your repo!
+    ref: main
+    dest: ./resources/[zdx]/ZDXFramework
+
+  # 5. Inject Server Config Settings
+  - action: append_file
+    file: ./server.cfg
+    data: |
+      
+      # --------------------------------------------------------
+      # ZDX Cinematic Framework Deployment Data
+      # --------------------------------------------------------
+      
+      # Ensure Core Libraries
+      ensure ox_lib
+      ensure ox_core
+
+      # Ensure Ped appearance logic
+      ensure illenium-appearance
+      
+      # Start ZDX Framework core
+      ensure cine
+      
+      # Assign ACE Admin permissions for legacy fallback (Optional, as ox_core role is also checked natively)
+      add_ace group.admin cine.use allow
+      add_ace group.admin cine.manage allow
